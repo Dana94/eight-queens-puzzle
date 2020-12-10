@@ -24,6 +24,6 @@ export default {
 <style>
 .row {
     display: grid;
-    grid-template-columns: repeat(8, 100px);
+    grid-template-columns: repeat(8, auto);
 }
 </style>

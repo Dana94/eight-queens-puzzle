@@ -18,7 +18,7 @@ export default {
 <style>
 .board {
     display: grid;
-    grid-template-rows: repeat(8, 100px);
+    grid-template-rows: repeat(8, auto);
     margin: 0 auto;
 }
 </style>
