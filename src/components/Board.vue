@@ -1,16 +1,16 @@
 <template>
   <div class="board">
-      <Square />
+      <Row v-for="i in 8" :key="i" :index_x="i-1" />
   </div>
 </template>
 
 <script>
-import Square from './Square.vue';
+import Row from './Row.vue';
 
 export default {
     name: "Board",
     components: {
-        Square
+        Row
     }
 }
 </script>
@@ -18,7 +18,7 @@ export default {
 <style>
 .board {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 100px);
+    margin: 0 auto;
 }
 </style>
