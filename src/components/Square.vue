@@ -1,6 +1,6 @@
 <template>
-  <div class="square" :class="{dark: dark, light: !dark}">
-    <img :src="queen" alt="Queen" class="queen" />
+  <div class="square" :class="{dark: dark, light: !dark}" @click="showQueen = !showQueen">
+    <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
       index_y: {
         type: Number,
         required: true
+      }
+    },
+    data() {
+      return {
+        showQueen: false
       }
     },
     computed: {

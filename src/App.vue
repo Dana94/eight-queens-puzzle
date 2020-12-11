@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <header>
+      <h1>8 Queens Puzzle</h1>
+    </header>
     <Board />
   </div>
 </template>
@@ -26,5 +29,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   display: flex;
+  flex-direction: column;
 }
 </style>
