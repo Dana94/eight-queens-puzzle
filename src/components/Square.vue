@@ -45,6 +45,13 @@ export default {
       queen() {
         return this.dark ? require("../assets/white-queen.svg") : require("../assets/black-queen.svg");
       }
+    },
+    watch: {
+      showQueen() {
+        if(this.showQueen) {
+          this.$store.dispatch('addQueen', {x: this.index_x, y: this.index_y});
+        }
+      }
     }
 }
 </script>
