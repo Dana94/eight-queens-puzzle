@@ -10,9 +10,6 @@ const state = {
 //     [x,y] : [[x1,y1], [x2,y2]]
 // }
 
-//mutations
-//add/remove Queen
-//clear board
 const mutations = {
     ADD_QUEEN(state, coords) {
         // calculate diagonal values (helper?)
@@ -20,8 +17,9 @@ const mutations = {
         state.board.set([coords.x, coords.y] + "", new Set());
         state.availableQueens -= 1;
     },
-    REMOVE_QUEEN(state) {
+    REMOVE_QUEEN(state, coords) {
         // remove key from board state
+        state.board.delete(`${coords.x},${coords.y}`)
         state.availableQueens += 1;
     },
     CLEAR_BOARD(state) {
@@ -33,8 +31,8 @@ const actions = {
     addQueen({commit}, coords) {
         commit(ADD_QUEEN, coords);
     },
-    removeQueen({commit}) {
-        commit(REMOVE_QUEEN);
+    removeQueen({commit}, coords) {
+        commit(REMOVE_QUEEN, coords);
     },
     clearBoard({commit}) {
         commit(CLEAR_BOARD);
@@ -42,15 +40,14 @@ const actions = {
 }
 
 
-//getters
-//error
 const getters = {
-    invalidMove: (state) => (coords) => {
-        for(let i = 0; i < 8; i++) {
-            console.log(state, coords)
-            // if()
-        }
-    },
+    // invalidMove: (state) => (coords) => {
+    //     for(let i = 0; i < 8; i++) {
+    //         console.log(state, coords)
+    //         // if()
+    //     }
+    //     // return state.availableQueens % 2 === 0;
+    // },
     availableQueens(state) {
         return state.availableQueens;
     }

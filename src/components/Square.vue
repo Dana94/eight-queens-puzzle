@@ -1,6 +1,15 @@
 <template>
-  <div class="square"
-    :class="{dark: dark, light: !dark, 'left-border': leftBorder, 'right-border': rightBorder, 'top-border': topBorder, 'bottom-border': bottomBorder}"
+  <div
+    class="square"
+    :class="{
+      dark: dark,
+      light: !dark,
+      'left-border': leftBorder,
+      'right-border': rightBorder,
+      'top-border': topBorder,
+      'bottom-border': bottomBorder,
+      'invalid': invalidMove
+    }"
     @click="select"
   >
     <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
@@ -47,6 +56,9 @@ export default {
       },
       canAddQueen() {
         return this.$store.getters.availableQueens > 0;
+      },
+      invalidMove() {
+        return false; //this.$store.getters.invalidMove;
       }
     },
     watch: {
@@ -54,7 +66,7 @@ export default {
         if(this.showQueen) {
           this.$store.dispatch('addQueen', {x: this.index_x, y: this.index_y});
         } else {
-          this.$store.dispatch('removeQueen');
+          this.$store.dispatch('removeQueen', {x: this.index_x, y: this.index_y});
         }
       }
     },
@@ -112,5 +124,8 @@ export default {
 }
 .square.bottom-border {
   border-bottom-width: 4px;
+}
+.square.invalid {
+  border-color: red;
 }
 </style>
