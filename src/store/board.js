@@ -1,7 +1,8 @@
-import {ADD_QUEEN} from './labels';
+import {ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD} from './labels';
 
 const state = {
-    board: new Map()
+    board: new Map(),
+    availableQueens: 8
 }
 
 // a Queen's position contains all the squares it connects to
@@ -17,10 +18,12 @@ const mutations = {
         // calculate diagonal values (helper?)
         // maybe change this later
         state.board.set([coords.x, coords.y] + "", new Set());
+        state.availableQueens -= 1;
     },
-    // REMOVE_QUEEN(state, coords) {
-
-    // },
+    REMOVE_QUEEN(state) {
+        // remove key from board state
+        state.availableQueens += 1;
+    },
     CLEAR_BOARD(state) {
         state.board.clear();
     }
@@ -30,12 +33,12 @@ const actions = {
     addQueen({commit}, coords) {
         commit(ADD_QUEEN, coords);
     },
-    // removeQueen({commit}, coords) {
-
-    // },
-    // clearBoard({commit}) {
-
-    // }
+    removeQueen({commit}) {
+        commit(REMOVE_QUEEN);
+    },
+    clearBoard({commit}) {
+        commit(CLEAR_BOARD);
+    }
 }
 
 
@@ -47,6 +50,9 @@ const getters = {
             console.log(state, coords)
             // if()
         }
+    },
+    availableQueens(state) {
+        return state.availableQueens;
     }
 }
 

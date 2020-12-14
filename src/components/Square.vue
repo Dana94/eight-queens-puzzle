@@ -1,7 +1,7 @@
 <template>
   <div class="square"
     :class="{dark: dark, light: !dark, 'left-border': leftBorder, 'right-border': rightBorder, 'top-border': topBorder, 'bottom-border': bottomBorder}"
-    @click="showQueen = !showQueen"
+    @click="select"
   >
     <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
   </div>
@@ -44,12 +44,33 @@ export default {
       },
       queen() {
         return this.dark ? require("../assets/white-queen.svg") : require("../assets/black-queen.svg");
+      },
+      canAddQueen() {
+        return this.$store.getters.availableQueens > 0;
       }
     },
     watch: {
       showQueen() {
         if(this.showQueen) {
           this.$store.dispatch('addQueen', {x: this.index_x, y: this.index_y});
+        } else {
+          this.$store.dispatch('removeQueen');
+        }
+      }
+    },
+    methods: {
+      select() {
+        // queens available to use
+        if(!this.showQueen && this.canAddQueen) {
+          this.showQueen = true;
+        }
+        // 8 queens are already on the board
+        else if(!this.showQueen && !this.canAddQueen){
+          alert('You can only add 8 Queens onto the board.');
+        }
+        // removing queen from store
+        else if (this.showQueen) {
+          this.showQueen = false;
         }
       }
     }
