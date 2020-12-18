@@ -58,7 +58,7 @@ export default {
         return this.$store.getters.availableQueens > 0;
       },
       invalidMove() {
-        return false; //this.$store.getters.invalidMove;
+        return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y});
       }
     },
     watch: {
