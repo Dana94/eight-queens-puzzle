@@ -1,4 +1,5 @@
 import {ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD} from './labels';
+import affectedAreas from './helper';
 
 const state = {
     board: new Map(),
@@ -14,7 +15,8 @@ const mutations = {
     ADD_QUEEN(state, coords) {
         // calculate diagonal values (helper?)
         // maybe change this later
-        state.board.set([coords.x, coords.y] + "", new Set());
+        let areas = affectedAreas(coords.x, coords.y);
+        state.board.set([coords.x, coords.y] + "", new Set(areas));
         state.availableQueens -= 1;
     },
     REMOVE_QUEEN(state, coords) {
@@ -41,13 +43,19 @@ const actions = {
 
 
 const getters = {
-    // invalidMove: (state) => (coords) => {
-    //     for(let i = 0; i < 8; i++) {
-    //         console.log(state, coords)
-    //         // if()
-    //     }
-    //     // return state.availableQueens % 2 === 0;
-    // },
+    invalidMove: (state) => (coords) => {
+        let invalid = false;
+
+        for(let [key, set] of state.board.entries()) {
+            // check diagonals
+            console.log(key)
+            if(set.has([coords.x, coords.y])) {
+                invalid = true;
+                console.log(invalid);
+            }
+        }
+        return invalid;
+    },
     availableQueens(state) {
         return state.availableQueens;
     }
