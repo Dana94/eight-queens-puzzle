@@ -31,4 +31,13 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  background-color: white;
+  border-radius: 10px;
+  max-width: 796px; /*work on this*/
+  margin: 0 auto;
+  padding: 2rem;
+}
 </style>
