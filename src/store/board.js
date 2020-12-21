@@ -1,9 +1,10 @@
-import { ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD } from './labels';
+import { ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD, SET_THEME } from './labels';
 import affectedAreas from './helper';
 
 const state = {
     board: new Map(),
-    availableQueens: 8
+    availableQueens: 8,
+    theme: 'dark'
 }
 
 // a Queen's position contains all the squares it connects to
@@ -25,6 +26,10 @@ const mutations = {
     },
     CLEAR_BOARD(state) {
         state.board.clear();
+    },
+    SET_THEME(state, theme) {
+        // set local storage
+        state.theme = theme;
     }
 }
 
@@ -37,6 +42,9 @@ const actions = {
     },
     clearBoard({ commit }) {
         commit(CLEAR_BOARD);
+    },
+    setTheme({commit}, theme) {
+        commit(SET_THEME, theme);
     }
 }
 
@@ -69,6 +77,9 @@ const getters = {
     },
     availableQueens(state) {
         return state.availableQueens;
+    },
+    getTheme(state) {
+        return state.theme;
     }
 }
 

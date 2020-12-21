@@ -2,6 +2,11 @@
   <div id="app">
     <header>
       <h1>8 Queens Puzzle</h1>
+      <button @click="setTheme">
+        <span v-if="!lightTheme">Light</span>
+        <span v-else>Dark</span>
+        Theme
+      </button>
     </header>
     <Board />
   </div>
@@ -12,14 +17,25 @@ import Board from './components/Board.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      lightTheme: false
+    }
+  },
   components: {
     Board
+  },
+  methods: {
+    setTheme() {
+      this.lightTheme = !this.lightTheme;
+      this.$store.dispatch('setTheme', this.lightTheme ? 'light' : 'dark');
+    }
   }
 }
 </script>
 
 <style>
-@import './App.css';
+@import "./App.css";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -33,7 +49,7 @@ export default {
 }
 
 h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   background-color: white;
   border-radius: 10px;
   max-width: 796px; /*work on this*/

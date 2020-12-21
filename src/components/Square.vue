@@ -2,13 +2,14 @@
   <div
     class="square"
     :class="{
-      dark: dark,
-      light: !dark,
       'left-border': leftBorder,
       'right-border': rightBorder,
       'top-border': topBorder,
       'bottom-border': bottomBorder,
       'invalid': invalidMove
+    }"
+    :style="{
+      backgroundColor: squareColor
     }"
     @click="select"
   >
@@ -64,6 +65,17 @@ export default {
           return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y}) && this.showQueen;
         }
         return false;
+      },
+      theme() {
+        return this.$store.getters.getTheme;
+      },
+      squareColor() {
+        if(this.dark) {
+          return this.theme === 'light' ? '#d18b47' : 'black';
+        }
+        else {
+          return this.theme === 'light' ? '#ffce9e' : 'white';
+        }
       }
     },
     watch: {
@@ -106,13 +118,7 @@ export default {
 .square:hover {
   cursor: pointer;
 }
-.square.dark {
-  background-color: black;
-}
 
-.square.light {
-  background-color: white;
-}
 .queen {
   height: 70%;
   width: 70%;
