@@ -58,8 +58,10 @@ export default {
         return this.$store.getters.availableQueens > 0;
       },
       invalidMove() {
-        if(this.showQueen) {
-          return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y});
+        // checks whenever another queen has been added/removed
+        if(this.$store.getters.availableQueens) {
+          // only outline in red if the square has its queen showing
+          return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y}) && this.showQueen;
         }
         return false;
       }
