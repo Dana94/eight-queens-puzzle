@@ -13,7 +13,7 @@
     }"
     @click="select"
   >
-    <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
+    <img :src="queen" alt="Queen" class="queen" v-if="showQueen && onBoard" />
   </div>
 </template>
 
@@ -78,7 +78,14 @@ export default {
         }
       },
       onBoard() {
-        return this.$store.getters.getBoardStatus({x: this.index_x, y: this.index_y});
+        // only reason if there's still 8 available queens and this square had it's queen already showing before
+          //   let boardStatus = this.$store.getters.getBoardStatus({x: this.index_x, y: this.index_y});
+        if(this.$store.getters.availableQueens === 8) {
+          this.hideQueen();
+          return false;
+        } else {
+          return true;
+        }
       }
     },
     watch: {
@@ -104,6 +111,9 @@ export default {
         else if (this.showQueen) {
           this.showQueen = false;
         }
+      },
+      hideQueen() {
+        this.showQueen = false;
       }
     }
 }

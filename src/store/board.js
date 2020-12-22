@@ -83,10 +83,7 @@ const getters = {
         return state.theme;
     },
     getBoardStatus: (state) => (coords) => {
-        for(let key of state.board.keys()) {
-            console.log(key)
-        }
-        return state.board.has(`${coords.x}, ${coords.y}`)
+        return state.board.has(`${coords.x},${coords.y}`)
     }
 }
 
