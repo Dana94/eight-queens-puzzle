@@ -60,7 +60,7 @@ export default {
       },
       invalidMove() {
         // checks whenever another queen has been added/removed
-        if(this.$store.getters.availableQueens) {
+        if(this.$store.getters.availableQueens < 8) {
           // only outline in red if the square has its queen showing
           return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y}) && this.showQueen;
         }
@@ -76,6 +76,9 @@ export default {
         else {
           return this.theme === 'light' ? '#ffce9e' : 'white';
         }
+      },
+      onBoard() {
+        return this.$store.getters.getBoardStatus({x: this.index_x, y: this.index_y});
       }
     },
     watch: {

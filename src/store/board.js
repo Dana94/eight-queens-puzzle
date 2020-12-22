@@ -26,6 +26,7 @@ const mutations = {
     },
     CLEAR_BOARD(state) {
         state.board.clear();
+        state.availableQueens = 8;
     },
     SET_THEME(state, theme) {
         // set local storage
@@ -80,6 +81,12 @@ const getters = {
     },
     getTheme(state) {
         return state.theme;
+    },
+    getBoardStatus: (state) => (coords) => {
+        for(let key of state.board.keys()) {
+            console.log(key)
+        }
+        return state.board.has(`${coords.x}, ${coords.y}`)
     }
 }
 
