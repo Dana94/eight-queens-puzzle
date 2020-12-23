@@ -2,13 +2,14 @@
   <div
     class="square"
     :class="{
-      dark: dark,
-      light: !dark,
       'left-border': leftBorder,
       'right-border': rightBorder,
       'top-border': topBorder,
       'bottom-border': bottomBorder,
       'invalid': invalidMove
+    }"
+    :style="{
+      backgroundColor: squareColor
     }"
     @click="select"
   >
@@ -57,21 +58,43 @@ export default {
       canAddQueen() {
         return this.$store.getters.availableQueens > 0;
       },
+      availableQueens() {
+        return this.$store.getters.availableQueens;
+      },
       invalidMove() {
         // checks whenever another queen has been added/removed
-        if(this.$store.getters.availableQueens) {
+        if(this.$store.getters.availableQueens < 8) {
           // only outline in red if the square has its queen showing
           return this.$store.getters.invalidMove({x: this.index_x, y: this.index_y}) && this.showQueen;
         }
         return false;
+      },
+      theme() {
+        return this.$store.getters.getTheme;
+      },
+      squareColor() {
+        if(this.dark) {
+          return this.theme === 'light' ? '#d18b47' : 'black';
+        }
+        else {
+          return this.theme === 'light' ? '#ffce9e' : 'white';
+        }
       }
     },
     watch: {
       showQueen() {
         if(this.showQueen) {
           this.$store.dispatch('addQueen', {x: this.index_x, y: this.index_y});
-        } else {
+
+        }
+        // only remove if the board hasn't been cleared
+        else if(this.availableQueens < 8) {
           this.$store.dispatch('removeQueen', {x: this.index_x, y: this.index_y});
+        }
+      },
+      availableQueens() {
+        if(this.availableQueens === 8) {
+          this.hideQueen();
         }
       }
     },
@@ -89,6 +112,9 @@ export default {
         else if (this.showQueen) {
           this.showQueen = false;
         }
+      },
+      hideQueen() {
+        this.showQueen = false;
       }
     }
 }
@@ -106,13 +132,7 @@ export default {
 .square:hover {
   cursor: pointer;
 }
-.square.dark {
-  background-color: black;
-}
 
-.square.light {
-  background-color: white;
-}
 .queen {
   height: 70%;
   width: 70%;
