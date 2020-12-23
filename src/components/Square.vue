@@ -13,7 +13,7 @@
     }"
     @click="select"
   >
-    <img :src="queen" alt="Queen" class="queen" v-if="showQueen && onBoard" />
+    <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
   </div>
 </template>
 
@@ -58,6 +58,9 @@ export default {
       canAddQueen() {
         return this.$store.getters.availableQueens > 0;
       },
+      availableQueens() {
+        return this.$store.getters.availableQueens;
+      },
       invalidMove() {
         // checks whenever another queen has been added/removed
         if(this.$store.getters.availableQueens < 8) {
@@ -76,24 +79,22 @@ export default {
         else {
           return this.theme === 'light' ? '#ffce9e' : 'white';
         }
-      },
-      onBoard() {
-        // only reason if there's still 8 available queens and this square had it's queen already showing before
-          //   let boardStatus = this.$store.getters.getBoardStatus({x: this.index_x, y: this.index_y});
-        if(this.$store.getters.availableQueens === 8) {
-          this.hideQueen();
-          return false;
-        } else {
-          return true;
-        }
       }
     },
     watch: {
       showQueen() {
         if(this.showQueen) {
           this.$store.dispatch('addQueen', {x: this.index_x, y: this.index_y});
-        } else {
+
+        }
+        // only remove if the board hasn't been cleared
+        else if(this.availableQueens < 8) {
           this.$store.dispatch('removeQueen', {x: this.index_x, y: this.index_y});
+        }
+      },
+      availableQueens() {
+        if(this.availableQueens === 8) {
+          this.hideQueen();
         }
       }
     },
