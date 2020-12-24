@@ -27,6 +27,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: fit-content;
+  margin: 0 auto;
 }
 
 
