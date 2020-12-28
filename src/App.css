@@ -2,3 +2,8 @@ html {
     height: 100vh;
     background-image: url('./assets/paper-texture.jpg');
 }
+
+body {
+    margin: 0;
+
+}
