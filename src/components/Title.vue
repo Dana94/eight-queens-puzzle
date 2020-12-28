@@ -10,10 +10,10 @@
           :class="{'light': lightTheme, 'dark': !lightTheme}"
         ></button>
         <button @click="clear" class="clear">Clear Board</button>
-        <img src="../assets/question.svg" alt="Information" class="info" />
+        <img src="../assets/question.svg" alt="Information" class="info" @click="showInfo = !showInfo" />
       </div>
     </div>
-    <Instructions />
+    <Instructions v-show="showInfo" />
   </header>
 </template>
 
@@ -24,7 +24,8 @@ export default {
     name: 'Title',
     data() {
         return {
-            lightTheme: false
+            lightTheme: false,
+            showInfo: false
         }
     },
     methods: {
