@@ -23,5 +23,6 @@ export default {
     display: grid;
     grid-template-rows: repeat(8, auto);
     margin: 0 auto;
+    max-width: 836px;
 }
 </style>

@@ -1,20 +1,25 @@
 <template>
   <header>
-    <h1>8 Queens Puzzle</h1>
-    <div>
-      <button
-        aria-label="Change board theme"
-        @click="setTheme"
-        class="theme"
-        :class="{'light': lightTheme, 'dark': !lightTheme}"
-      ></button>
-      <button @click="clear" class="clear">Clear Board</button>
-      <img src="../assets/question.svg" alt="Information" class="info" />
+    <div class="title">
+      <h1>8 Queens Puzzle</h1>
+      <div class="buttons">
+        <button
+          aria-label="Change board theme"
+          @click="setTheme"
+          class="theme"
+          :class="{'light': lightTheme, 'dark': !lightTheme}"
+        ></button>
+        <button @click="clear" class="clear">Clear Board</button>
+        <img src="../assets/question.svg" alt="Information" class="info" />
+      </div>
     </div>
+    <Instructions />
   </header>
 </template>
 
 <script>
+import Instructions from './Instructions.vue';
+
 export default {
     name: 'Title',
     data() {
@@ -30,6 +35,9 @@ export default {
         clear() {
             this.$store.dispatch('clearBoard');
         }
+    },
+    components: {
+      Instructions
     }
 }
 </script>
@@ -43,13 +51,20 @@ header {
   width: 100%;
   margin-bottom: 2rem;
   justify-content: space-between;
+  flex-direction: column;
   font-family: "Playfair Display", serif;
 }
 h1 {
   margin-left: 2rem;
 }
 
-header div {
+header .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header .buttons {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -87,7 +102,9 @@ button.clear {
 
 img.info {
   width: 2rem;
+  margin: 1rem;
 }
+
 button:hover,
 img.info:hover {
   cursor: pointer;

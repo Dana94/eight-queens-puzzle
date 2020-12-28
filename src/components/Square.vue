@@ -153,11 +153,4 @@ export default {
 .square.invalid {
   border-color: red;
 }
-
-@media (max-width: 768px) {
-  .square {
-    width: 70px;
-    height: 70px;
-  }
-}
 </style>
