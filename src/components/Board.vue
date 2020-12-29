@@ -1,18 +1,18 @@
 <template>
   <div class="board">
-      <Success />
+      <!-- <Success /> -->
       <Row v-for="i in 8" :key="i" :index_x="i-1" />
   </div>
 </template>
 
 <script>
-import Success from './Success.vue';
+// import Success from './Success.vue';
 import Row from './Row.vue';
 
 export default {
     name: "Board",
     components: {
-        Success,
+        // Success,
         Row
     }
 }
