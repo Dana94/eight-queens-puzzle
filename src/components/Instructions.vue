@@ -19,5 +19,6 @@ export default {
     text-align: left;
     padding: 0 2rem;
     padding-bottom: 1rem;
+    max-width: fit-content;
 }
 </style>
