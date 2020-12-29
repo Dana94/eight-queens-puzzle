@@ -1,13 +1,18 @@
 <template>
   <div class="success">
     <h2>You found a solution!</h2>
-    <button>Play Again</button>
+    <button @click="clear">Play Again</button>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'Success'
+    name: 'Success',
+    methods: {
+      clear() {
+          this.$store.dispatch('clearBoard');
+      }
+    }
 }
 </script>
 
