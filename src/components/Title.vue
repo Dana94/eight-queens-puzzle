@@ -99,6 +99,7 @@ button.clear {
   border-radius: 10px;
   font-family: "Playfair Display", serif;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 img.info {

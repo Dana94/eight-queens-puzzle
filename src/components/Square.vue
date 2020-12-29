@@ -96,6 +96,14 @@ export default {
         if(this.availableQueens === 8) {
           this.hideQueen();
         }
+      },
+      invalidMove() {
+        if(this.invalidMove) {
+          this.$store.dispatch('addInvalid');
+        }
+        else {
+          this.$store.dispatch('removeInvalid');
+        }
       }
     },
     methods: {
