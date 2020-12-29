@@ -97,6 +97,9 @@ const getters = {
     },
     getBoardStatus: (state) => (coords) => {
         return state.board.has(`${coords.x},${coords.y}`)
+    },
+    invalids(state) {
+        return state.invalids;
     }
 }
 
