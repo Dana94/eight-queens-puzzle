@@ -1,6 +1,7 @@
 <template>
   <div
     class="square"
+    :ref="squareRef"
     :class="{
       'left-border': leftBorder,
       'right-border': rightBorder,
@@ -11,13 +12,22 @@
     :style="{
       backgroundColor: squareColor
     }"
+    @keydown.enter="select"
     @click="select"
+    :tabindex="index_x === 0 && index_y === 0 ? 0 : -1"
+    @keydown.up="setFocus(index_x - 1, index_y)"
+    @keydown.down="setFocus(index_x + 1, index_y)"
+    @keydown.left="setFocus(index_x, index_y - 1)"
+    @keydown.right="setFocus(index_x, index_y + 1)"
+    @focus="setFocus(index_x, index_y)"
   >
     <img :src="queen" alt="Queen" class="queen" v-if="showQueen" />
   </div>
 </template>
 
 <script>
+import { eventBus } from "../main";
+
 export default {
     name: "Square",
     props: {
@@ -79,6 +89,12 @@ export default {
         else {
           return this.theme === 'light' ? '#ffce9e' : 'white';
         }
+      },
+      focus() {
+        return this.$store.getters.getFocus;
+      },
+      squareRef() {
+        return `square_${this.index_x}_${this.index_y}`;
       }
     },
     watch: {
@@ -123,8 +139,24 @@ export default {
       },
       hideQueen() {
         this.showQueen = false;
+      },
+      setFocus (focusX, focusY) {
+        this.$store.dispatch('setFocus', {
+          x: focusX,
+          y: focusY
+        });
+        eventBus.$emit('changeFocus');
       }
-    }
+    },
+    mounted () {
+      // change focus depending on state's focus coordinates
+      eventBus.$on("changeFocus", () => {
+        const focusElem = `square_${this.focus.x}_${this.focus.y}`;
+        if (!!this.$refs[focusElem] && this.focus.x === this.index_x && this.focus.y === this.index_y) {
+          this.$refs[focusElem].focus();
+        }
+    });
+  }
 }
 </script>
 
@@ -136,6 +168,10 @@ export default {
   justify-content: center;
   align-items: center;
   border: 2px solid #cacaca;
+}
+.square:focus {
+  outline: 3px solid blue;
+  z-index: 1; /*shows over success message?*/
 }
 .square:hover {
   cursor: pointer;
