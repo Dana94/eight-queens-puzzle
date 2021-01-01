@@ -136,6 +136,7 @@ export default {
   justify-content: center;
   align-items: center;
   border: 2px solid #cacaca;
+  filter: url('../assets/wood-texture.jpg');
 }
 .square:hover {
   cursor: pointer;
