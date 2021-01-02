@@ -73,26 +73,19 @@ header .buttons {
 }
 
 button.theme {
-  border: none;
   padding: 1rem;
-  width: 4rem;
   margin: 1rem;
+  border: 1px solid;
+  border-radius: 10px;
 }
 button.theme.wood {
-  background: linear-gradient(
-    106deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: linear-gradient(to bottom right, black 50%, white 50%);
 }
 
 button.theme.classic {
-  background: linear-gradient(
-    106deg,
-    rgb(209, 139, 71) 0%,
-    rgb(255, 206, 158) 100%
-  );
+  background: linear-gradient(to bottom right,  rgb(209, 139, 71) 50%, rgb(255, 206, 158) 50%);
 }
+
 button.clear {
   border: 0;
   padding: 1rem;
