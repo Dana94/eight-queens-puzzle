@@ -1,11 +1,15 @@
-import { ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD, SET_THEME, ADD_INVALID, REMOVE_INVALID } from './labels';
+import { ADD_QUEEN, REMOVE_QUEEN, CLEAR_BOARD, SET_THEME, ADD_INVALID, REMOVE_INVALID, SET_FOCUS } from './labels';
 import affectedAreas from './helper';
 
 const state = {
     board: new Map(),
     availableQueens: 8,
     theme: 'classic',
-    invalids: 0
+    invalids: 0,
+    focus: {
+        x: 0,
+        y: 0
+    }
 }
 
 // a Queen's position contains all the squares it connects to
@@ -38,6 +42,29 @@ const mutations = {
     },
     REMOVE_INVALID(state) {
         state.invalids -= 1;
+    },
+    // so someone can use arrow eys to navigate the board
+    SET_FOCUS(state, { x, y }) {
+        if (x >= 0 && y >= 0 && y <= 7 && x <= 7) {
+            state.focus.x = x;
+            state.focus.y = y;
+        }
+        // up arrow will focus on the bottom most grid in the column
+        if (x < 0) {
+            state.focus.x = 7;
+        }
+        // down arrow will focus on the top most grid in the column
+        if (x > 7) {
+            state.focus.x = 0;
+        }
+        // left arrow will focus on right most square in the row
+        if (y < 0) {
+            state.focus.y = 7;
+        }
+        // right arrow will focus on left most square in the row
+        if (y > 7) {
+            state.focus.y = 0;
+        }
     }
 }
 
@@ -51,15 +78,18 @@ const actions = {
     clearBoard({ commit }) {
         commit(CLEAR_BOARD);
     },
-    setTheme({commit}, theme) {
+    setTheme({ commit }, theme) {
         commit(SET_THEME, theme);
     },
-    addInvalid({commit}) {
+    addInvalid({ commit }) {
         commit(ADD_INVALID)
     },
-    removeInvalid({commit}) {
+    removeInvalid({ commit }) {
         commit(REMOVE_INVALID);
-    }
+    },
+    setFocus({ commit }, payload) {
+        commit(SET_FOCUS, payload);
+    },
 }
 
 
@@ -100,6 +130,9 @@ const getters = {
     },
     invalids(state) {
         return state.invalids;
+    },
+    getFocus(state) {
+        return state.focus;
     }
 }
 
