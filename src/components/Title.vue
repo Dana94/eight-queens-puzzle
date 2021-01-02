@@ -7,7 +7,7 @@
           aria-label="Change board theme"
           @click="setTheme"
           class="theme"
-          :class="{'light': lightTheme, 'dark': !lightTheme}"
+          :class="{'wood': woodTheme, 'classic': !woodTheme}"
         ></button>
         <button @click="clear" class="clear">Clear Board</button>
         <img src="../assets/question.svg" alt="Information" class="info" @click="showInfo = !showInfo" />
@@ -24,14 +24,14 @@ export default {
     name: 'Title',
     data() {
         return {
-            lightTheme: false,
+            woodTheme: false,
             showInfo: false
         }
     },
     methods: {
         setTheme() {
-            this.lightTheme = !this.lightTheme;
-            this.$store.dispatch('setTheme', this.lightTheme ? 'light' : 'dark');
+            this.woodTheme = !this.woodTheme;
+            this.$store.dispatch('setTheme', this.woodTheme ? 'wood' : 'classic');
         },
         clear() {
             this.$store.dispatch('clearBoard');
@@ -78,7 +78,7 @@ button.theme {
   width: 4rem;
   margin: 1rem;
 }
-button.theme.light {
+button.theme.wood {
   background: linear-gradient(
     106deg,
     rgba(0, 0, 0, 1) 0%,
@@ -86,7 +86,7 @@ button.theme.light {
   );
 }
 
-button.theme.dark {
+button.theme.classic {
   background: linear-gradient(
     106deg,
     rgb(209, 139, 71) 0%,

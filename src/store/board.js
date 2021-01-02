@@ -4,7 +4,7 @@ import affectedAreas from './helper';
 const state = {
     board: new Map(),
     availableQueens: 8,
-    theme: 'dark',
+    theme: 'classic',
     invalids: 0
 }
 
