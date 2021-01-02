@@ -7,7 +7,7 @@
           aria-label="Change board theme"
           @click="setTheme"
           class="theme"
-          :class="{'light': lightTheme, 'dark': !lightTheme}"
+          :class="{'wood': woodTheme, 'classic': !woodTheme}"
         ></button>
         <button @click="clear" class="clear">Clear Board</button>
         <img src="../assets/question.svg" alt="Information" class="info" @click="showInfo = !showInfo" />
@@ -24,14 +24,14 @@ export default {
     name: 'Title',
     data() {
         return {
-            lightTheme: false,
+            woodTheme: false,
             showInfo: false
         }
     },
     methods: {
         setTheme() {
-            this.lightTheme = !this.lightTheme;
-            this.$store.dispatch('setTheme', this.lightTheme ? 'light' : 'dark');
+            this.woodTheme = !this.woodTheme;
+            this.$store.dispatch('setTheme', this.woodTheme ? 'wood' : 'classic');
         },
         clear() {
             this.$store.dispatch('clearBoard');
@@ -73,26 +73,19 @@ header .buttons {
 }
 
 button.theme {
-  border: none;
   padding: 1rem;
-  width: 4rem;
   margin: 1rem;
+  border: 1px solid;
+  border-radius: 10px;
 }
-button.theme.light {
-  background: linear-gradient(
-    106deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+button.theme.wood {
+  background: linear-gradient(to bottom right, black 50%, white 50%);
 }
 
-button.theme.dark {
-  background: linear-gradient(
-    106deg,
-    rgb(209, 139, 71) 0%,
-    rgb(255, 206, 158) 100%
-  );
+button.theme.classic {
+  background: linear-gradient(to bottom right,  rgb(209, 139, 71) 50%, rgb(255, 206, 158) 50%);
 }
+
 button.clear {
   border: 0;
   padding: 1rem;

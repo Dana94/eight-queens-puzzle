@@ -7,10 +7,11 @@
       'right-border': rightBorder,
       'top-border': topBorder,
       'bottom-border': bottomBorder,
-      'invalid': invalidMove
-    }"
-    :style="{
-      backgroundColor: squareColor
+      'invalid': invalidMove,
+      'wood-light': !dark && theme === 'wood',
+      'wood-dark': dark && theme === 'wood',
+      'classic-light':!dark && theme === 'classic',
+      'classic-dark': dark && theme === 'classic'
     }"
     @keydown.enter="select"
     @click="select"
@@ -81,14 +82,6 @@ export default {
       },
       theme() {
         return this.$store.getters.getTheme;
-      },
-      squareColor() {
-        if(this.dark) {
-          return this.theme === 'light' ? '#d18b47' : 'black';
-        }
-        else {
-          return this.theme === 'light' ? '#ffce9e' : 'white';
-        }
       },
       focus() {
         return this.$store.getters.getFocus;
@@ -173,6 +166,24 @@ export default {
   outline: 3px solid blue;
   z-index: 1; /*shows over success message?*/
 }
+/* wood board */
+.square.wood-light {
+  background-image: url("../assets/wood-texture-light.png");
+  background-size: cover;
+}
+.square.wood-dark {
+  background-image: url("../assets/wood-texture-dark.png");
+  background-size: cover;
+}
+
+/* classic board */
+.square.classic-light {
+  background-color: white;
+}
+.square.classic-dark {
+  background-color: black;
+}
+
 .square:hover {
   cursor: pointer;
 }
