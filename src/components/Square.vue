@@ -71,10 +71,10 @@ export default {
           return require("../assets/pieces/classic/black-queen.svg");
         }
         else if (this.dark && this.theme === 'wood') {
-          return require("../assets/pieces/classic/white-queen.svg");
+          return require("../assets/pieces/wood/light-wood-queen.svg");
         }
         else {
-           return require("../assets/pieces/classic/black-queen.svg");
+           return require("../assets/pieces/wood/dark-wood-queen.svg");
         }
       },
       canAddQueen() {
@@ -179,11 +179,11 @@ export default {
 }
 /* wood board */
 .square.wood-light {
-  background-image: url("../assets/textures/wood-texture-light.png");
+  background-image: url("../assets/textures/light-wood-texture.jpg");
   background-size: cover;
 }
 .square.wood-dark {
-  background-image: url("../assets/textures/wood-texture-dark.png");
+  background-image: url("../assets/textures/dark-wood-texture.jpg");
   background-size: cover;
 }
 
