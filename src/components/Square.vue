@@ -64,7 +64,18 @@ export default {
         return this.index_x === 7;
       },
       queen() {
-        return this.dark ? require("../assets/white-queen.svg") : require("../assets/black-queen.svg");
+        if(this.dark && this.theme === 'classic') {
+          return require("../assets/pieces/classic/white-queen.svg");
+        }
+        else if (!this.dark && this.theme === 'classic') {
+          return require("../assets/pieces/classic/black-queen.svg");
+        }
+        else if (this.dark && this.theme === 'wood') {
+          return require("../assets/pieces/classic/white-queen.svg");
+        }
+        else {
+           return require("../assets/pieces/classic/black-queen.svg");
+        }
       },
       canAddQueen() {
         return this.$store.getters.availableQueens > 0;
@@ -168,11 +179,11 @@ export default {
 }
 /* wood board */
 .square.wood-light {
-  background-image: url("../assets/wood-texture-light.png");
+  background-image: url("../assets/textures/wood-texture-light.png");
   background-size: cover;
 }
 .square.wood-dark {
-  background-image: url("../assets/wood-texture-dark.png");
+  background-image: url("../assets/textures/wood-texture-dark.png");
   background-size: cover;
 }
 
