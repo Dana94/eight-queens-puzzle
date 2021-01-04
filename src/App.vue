@@ -9,14 +9,12 @@
 import Board from './components/Board.vue'
 import Title from './components/Title.vue';
 
-
 export default {
   name: 'App',
   components: {
     Board,
     Title
-  },
-
+  }
 }
 </script>
 
@@ -33,6 +31,4 @@ export default {
   width: fit-content;
   margin: 0 auto;
 }
-
-
 </style>

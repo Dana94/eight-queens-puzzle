@@ -19,13 +19,11 @@ const state = {
 
 const mutations = {
     ADD_QUEEN(state, coords) {
-        // maybe change this later
         let areas = affectedAreas(coords.x, coords.y);
         state.board.set([coords.x, coords.y] + "", new Set(areas));
         state.availableQueens -= 1;
     },
     REMOVE_QUEEN(state, coords) {
-        // remove key from board state
         state.board.delete(`${coords.x},${coords.y}`)
         state.availableQueens += 1;
     },
@@ -43,7 +41,7 @@ const mutations = {
     REMOVE_INVALID(state) {
         state.invalids -= 1;
     },
-    // so someone can use arrow eys to navigate the board
+    // use arrow keys to navigate the board
     SET_FOCUS(state, { x, y }) {
         if (x >= 0 && y >= 0 && y <= 7 && x <= 7) {
             state.focus.x = x;
@@ -89,7 +87,7 @@ const actions = {
     },
     setFocus({ commit }, payload) {
         commit(SET_FOCUS, payload);
-    },
+    }
 }
 
 

@@ -48,7 +48,7 @@ export default {
     },
     computed: {
       dark() {
-        // only coordiantes that are not both even or both odd values are dark
+        // only coordiantes that are not both even or both odd values are dark squares
         return (this.index_x % 2 === 0 && this.index_y % 2 !== 0) || (this.index_x % 2 !== 0 && this.index_y % 2 === 0)
       },
       leftBorder() {
@@ -74,7 +74,7 @@ export default {
           return require("../assets/pieces/wood/light-wood-queen.svg");
         }
         else {
-           return require("../assets/pieces/wood/dark-wood-queen.svg");
+          return require("../assets/pieces/wood/dark-wood-queen.svg");
         }
       },
       canAddQueen() {
@@ -175,7 +175,7 @@ export default {
 }
 .square:focus {
   outline: 3px solid blue;
-  z-index: 1; /*shows over success message?*/
+  z-index: 1;
 }
 /* wood board */
 .square.wood-light {
