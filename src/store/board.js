@@ -32,7 +32,6 @@ const mutations = {
         state.availableQueens = 8;
     },
     SET_THEME(state, theme) {
-        // set local storage
         state.theme = theme;
     },
     ADD_INVALID(state) {
@@ -108,6 +107,7 @@ const getters = {
                     invalid = true;
                 }
                 //check diagonals
+                // wouldn't .has() work here?
                 for (let val of set.entries()) {
                     if (val[0][0] === coords.x && val[0][1] === coords.y) {
                         invalid = true;
