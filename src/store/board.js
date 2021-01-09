@@ -19,13 +19,11 @@ const state = {
 
 const mutations = {
     ADD_QUEEN(state, coords) {
-        // maybe change this later
         let areas = affectedAreas(coords.x, coords.y);
         state.board.set([coords.x, coords.y] + "", new Set(areas));
         state.availableQueens -= 1;
     },
     REMOVE_QUEEN(state, coords) {
-        // remove key from board state
         state.board.delete(`${coords.x},${coords.y}`)
         state.availableQueens += 1;
     },
@@ -34,7 +32,6 @@ const mutations = {
         state.availableQueens = 8;
     },
     SET_THEME(state, theme) {
-        // set local storage
         state.theme = theme;
     },
     ADD_INVALID(state) {
@@ -43,7 +40,7 @@ const mutations = {
     REMOVE_INVALID(state) {
         state.invalids -= 1;
     },
-    // so someone can use arrow eys to navigate the board
+    // use arrow keys to navigate the board
     SET_FOCUS(state, { x, y }) {
         if (x >= 0 && y >= 0 && y <= 7 && x <= 7) {
             state.focus.x = x;
@@ -89,7 +86,7 @@ const actions = {
     },
     setFocus({ commit }, payload) {
         commit(SET_FOCUS, payload);
-    },
+    }
 }
 
 
@@ -97,12 +94,10 @@ const getters = {
     invalidMove: (state) => (coords) => {
         let invalid = false;
 
-        //optimize
         for (let [key, set] of state.board.entries()) {
-
             // check rows and columns
             let keyArr = key.split(",");
-            //stop checking board coords when it reaches its own coords (otherwise it will find itself and say it's invalid)
+            //don't check its own coords (otherwise it will find itself and say it's invalid)
             if (!(parseInt(keyArr[0]) === coords.x && parseInt(keyArr[1]) === coords.y)) {
 
                 //rows and columns (only matches the x OR the y, not both)

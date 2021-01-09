@@ -55,6 +55,7 @@ header {
   flex-direction: column;
   font-family: "Playfair Display", serif;
 }
+
 h1 {
   margin-left: 2rem;
 }
@@ -78,6 +79,7 @@ button.theme {
   border: 1px solid;
   border-radius: 10px;
 }
+
 button.theme.wood {
   background: linear-gradient(to bottom right, black 50%, white 50%);
 }
