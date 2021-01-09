@@ -12,26 +12,10 @@ The game can be solely accessed through the keyboard alone.
 1. `npm install`
 1. `npm run serve` to start a local dev server at `http://localhost:8080`
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
